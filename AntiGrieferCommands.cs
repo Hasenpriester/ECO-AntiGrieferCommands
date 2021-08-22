@@ -82,7 +82,7 @@ namespace AntiGrieferCommands
             }
 
             IEnumerable<LocString> contents = ServiceHolder<IWorldObjectManager>.Obj.All
-                .Where(worldObject => worldObject.GetType() == searchItem.GetType() || (typeof(IRepresentsItem).IsAssignableFrom(worldObject.GetType()) && ((IRepresentsItem)worldObject).RepresentedItemType == searchItem.GetType()))
+                .Where(worldObject => worldObject.GetType() == searchItem.GetType())
                 .Select(worldObject => (worldObject: worldObject, distance: Vector3.Distance(worldObject.Position, user.Player.Position)))
                 .OrderBy(x => x.distance)
                 .Select(x => x.worldObject.UILink(x.worldObject.UILinkContent().Concat($" {Text.Info(ShortLocs.Meters(x.distance))}")));
